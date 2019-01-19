@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.rbac.dao.IUserDao">
+
+    <resultMap type="com.project.rbac.entity.User" id="UserMap">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="telephone" property="telephone"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="remark" property="remark"/>
+        <result column="filepath" property="filePath"/>
+        <result column="createdate" property="createDate"/>
+        <result column="updatedate" property="updateDate"/>
+        <result column="lastlogindate" property="lastLoginDate"/>
+        <result column="logintimes" property="loginTimes"/>
+    </resultMap>
+
+    <sql id="conditions">
+        WHERE 1=1
+        <if test="username != null and username != ''">
+            AND username=#{username}
+        </if>
+        <if test="telephone != null and telephone != ''">
+            AND telephone=#{telephone}
+        </if>
+        <if test="email != null and email != ''">
+            AND email=#{email}
+        </if>
+        <if test="password != null and password != ''">
+            AND password=#{password}
+        </if>
+    </sql>
+
+    <sql id="columns">
+        username,telephone,email,password,remark,filepath,createdate,updatedate
+    </sql>
+
+    <insert id="insert" parameterType="com.project.rbac.entity.User">
+        INSERT INTO user
+        (<include refid="columns"/>,logintimes)
+        VALUES
+        (
+        #{username},#{telephone},#{email},#{password},#{remark},#{filePath},now(),now(),0
+        )
+    </insert>
+
+    <update id="update" parameterType="com.project.rbac.entity.User">
+        UPDATE user SET
+        email = #{email},
+        telephone = #{telephone},
+        remark = #{remark},
+        updateDate = now()
+        WHERE id = #{id}
+    </update>
+
+    <delete id="deleteByPrimaryKey" parameterType="int">
+        DELETE from user WHERE id = #{id}
+    </delete>
+
+    <update id="updateLoginInfo" parameterType="com.project.rbac.entity.User">
+        UPDATE user SET
+        lastlogindate = now(),
+        logintimes = logintimes+1
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectOne" parameterType="HashMap" resultMap="UserMap">
+        SELECT * FROM user
+        <include refid="conditions"/>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="int" resultMap="UserMap">
+        SELECT * FROM user
+        WHERE id = #{id}
+    </select>
+
+    <select id="selectList" parameterType="HashMap" resultMap="UserMap">
+        SELECT * FROM user
+        <include refid="conditions"/>
+    </select>
+
+    <select id="existUsername" parameterType="string" resultType="int">
+        SELECT count(*) FROM user WHERE username = #{username}
+    </select>
+
+</mapper>

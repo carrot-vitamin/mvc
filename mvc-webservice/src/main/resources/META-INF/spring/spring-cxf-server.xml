@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
+
+    <!--下面的class属性值一定要跟项目中服务实现类的包路径完全一致-->
+    <!-- wsdl地址：http://IP:PORT/${contextPath}/webservice/${address}?wsdl -->
+    <!--http://IP:PORT/${contextPath}/webservice 可查看所有发布的webservice列表-->
+    <jaxws:endpoint id="user" implementor="com.project.webservice.user.service.impl.UserServiceImpl"
+                    address="/getUser"/>
+
+</beans>

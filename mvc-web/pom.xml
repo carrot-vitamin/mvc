@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>mvc</artifactId>
+        <groupId>com.project</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>mvc-web</artifactId>
+    <packaging>war</packaging>
+
+    <name>mvc-web Maven Webapp</name>
+    <url>http://localhost:8080/mvn/index</url>
+
+    <build>
+        <finalName>mvc</finalName>
+    </build>
+
+    <dependencies>
+        <!--引入freemarker-->
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>2.3.23</version>
+        </dependency>
+
+        <!--支持文件上传-->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+        <!--集成CXF-->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+
+        <!--为降低各个模块之间的耦合度，引入web模块自身需要的jar包，保证在不引入任何其它模块的情况下能正常启动-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${javax.servlet-api.version}</version>
+        </dependency>
+        <!--前端通知推送框架-->
+        <dependency>
+            <groupId>org.directwebremoting</groupId>
+            <artifactId>dwr</artifactId>
+            <version>${dwr.version}</version>
+        </dependency>
+
+        <!--引入controller模块-->
+        <dependency>
+            <groupId>com.project</groupId>
+            <artifactId>mvc-controller</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--引入webservice模块-->
+        <!--<dependency>
+            <groupId>com.project</groupId>
+            <artifactId>mvc-webservice</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>-->
+    </dependencies>
+
+</project>

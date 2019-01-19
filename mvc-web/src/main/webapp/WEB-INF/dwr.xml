@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://www.getahead.ltd.uk/dwr/dwr30.dtd">
+
+<dwr>
+    <allow>
+        <create creator="new" javascript="MessagePush"><!--MessagePush在页面的javascript中使用-->
+            <!--com.project.web.dwr.MessagePush 实现了想要调用的方法-->
+            <param name="class" value="com.project.web.dwr.MessagePush"/>
+        </create>
+    </allow>
+</dwr>

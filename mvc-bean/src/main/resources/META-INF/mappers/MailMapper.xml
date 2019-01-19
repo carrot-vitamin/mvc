@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.project.bean.dao.IMailDao">
+
+    <resultMap type="com.project.bean.bean.MailInfo" id="MailMap">
+        <id property="id" column="id"/>
+        <result property="fromUser" column="fromuser"/>
+        <result property="fromAddr" column="fromaddr"/>
+        <result property="to" column="destusers"/>
+        <result property="cc" column="cc"/>
+        <result property="subject" column="subject"/>
+        <result property="sendDate" column="senddate"/>
+        <result property="content" column="content"/>
+        <result property="isNeedToRead" column="needtoread"/>
+        <result property="containFiles" column="containsfiles"/>
+        <result property="isNeedReply" column="needtoreply"/>
+    </resultMap>
+
+    <sql id="columns">
+        fromuser,fromaddr,destusers,cc,subject,senddate,content,needtoread,containsfiles,needtoreply
+    </sql>
+
+    <insert id="insert" parameterType="com.project.bean.bean.MailInfo">
+        INSERT INTO mail (<include refid="columns"/>)
+        VALUES (
+        #{fromUser}, #{fromAddr},#{to},#{cc},#{subject},now(),#{content},#{isNeedToRead},#{containFiles},#{isNeedReply}
+        )
+    </insert>
+
+    <select id="selectByPrimaryKey" parameterType="long" resultMap="MailMap">
+        SELECT id,
+        <include refid="columns"/>
+        FROM mail WHERE id = #{id}
+    </select>
+
+</mapper>
